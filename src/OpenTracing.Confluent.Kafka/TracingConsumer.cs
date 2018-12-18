@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using Confluent.Kafka;
-using OpenTracing;
 
-namespace OpenTracingKafkaClient
+namespace OpenTracing.Confluent.Kafka
 {
     public class TracingConsumer<TKey, TValue> : IConsumer<TKey, TValue>
     {
@@ -58,7 +57,7 @@ namespace OpenTracingKafkaClient
         {
             result = _consumer.Consume(timeout);
 
-            var scope = _tracer.CreateActiveConsumerSpanFrom(result.Headers.ToDictionary(Encoding.UTF8));
+            var scope = _tracer.CreateActiveConsumerScopeFrom(result.Headers.ToDictionary(Encoding.UTF8));
 
             scope.Span.SetTag("kafka.topic", result.Topic);
             scope.Span.SetTag("kafka.partition", result.Partition);
@@ -75,7 +74,7 @@ namespace OpenTracingKafkaClient
         {
             result = _consumer.Consume(cancellationToken);
 
-            var scope = _tracer.CreateActiveConsumerSpanFrom(result.Headers.ToDictionary(Encoding.UTF8));
+            var scope = _tracer.CreateActiveConsumerScopeFrom(result.Headers.ToDictionary(Encoding.UTF8));
 
             scope.Span.SetTag("kafka.topic", result.Topic);
             scope.Span.SetTag("kafka.partition", result.Partition);

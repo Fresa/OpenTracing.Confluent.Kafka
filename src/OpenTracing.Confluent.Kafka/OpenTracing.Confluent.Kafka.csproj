@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
+    <AssemblyName>OpenTracing.Confluent.Kafka</AssemblyName>
+    <RootNamespace>OpenTracing.Confluent.Kafka</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

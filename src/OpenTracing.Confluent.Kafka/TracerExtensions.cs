@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using OpenTracing;
 using OpenTracing.Propagation;
 using OpenTracing.Tag;
 
-namespace OpenTracingKafkaClient
+namespace OpenTracing.Confluent.Kafka
 {
     public static class TracerExtensions
     {
-        public static IScope CreateProducerScopeFrom(this ITracer tracer, IDictionary<string, string> headers)
+        public static IScope CreateActiveProducerScopeFrom(this ITracer tracer, IDictionary<string, string> headers)
         {
             var spanBuilder = tracer.BuildSpan("send")
                 .WithTag(Tags.SpanKind.Key, Tags.SpanKindProducer);
@@ -26,7 +25,7 @@ namespace OpenTracingKafkaClient
             }, scope);
         }
 
-        public static IScope CreateActiveConsumerSpanFrom(this ITracer tracer, IDictionary<string, string> headers)
+        public static IScope CreateActiveConsumerScopeFrom(this ITracer tracer, IDictionary<string, string> headers)
         {
             var spanBuilder = tracer.BuildSpan("receive")
                 .WithTag(Tags.SpanKind.Key, Tags.SpanKindConsumer);

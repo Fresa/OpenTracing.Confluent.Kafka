@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.5.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Test.It" Version="2.1.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\OpenTracing.Confluent.Kafka\OpenTracing.Confluent.Kafka.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="OpenTracing">
+      <HintPath>C:\Users\Fresa\.nuget\packages\opentracing\0.12.0\lib\netstandard1.3\OpenTracing.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

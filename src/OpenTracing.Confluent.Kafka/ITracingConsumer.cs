@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading;
 using Confluent.Kafka;
-using OpenTracing;
 
-namespace OpenTracingKafkaClient
+namespace OpenTracing.Confluent.Kafka
 {
     public interface ITracingConsumer<TKey, TValue> : IConsumer<TKey, TValue>
     {

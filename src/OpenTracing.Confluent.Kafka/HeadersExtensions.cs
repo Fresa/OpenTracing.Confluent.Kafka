@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Confluent.Kafka;
 
-namespace OpenTracingKafkaClient
+namespace OpenTracing.Confluent.Kafka
 {
     internal static class HeadersExtensions
     {

@@ -1,7 +1,6 @@
 ﻿using System;
-using OpenTracing;
 
-namespace OpenTracingKafkaClient
+namespace OpenTracing.Confluent.Kafka
 {
     internal class DelegateOnDisposeScopeDecorator : IScope
     {

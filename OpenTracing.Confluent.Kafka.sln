@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{722D70BB-2833-41FE-AF75-DE908D0EAE26}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTracing.Confluent.Kafka.Tests", "Tests\OpenTracing.Confluent.Kafka.Tests\OpenTracing.Confluent.Kafka.Tests.csproj", "{77566FFD-6259-4748-8EF6-432B9F76E892}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTracing.Confluent.Kafka", "src\OpenTracing.Confluent.Kafka\OpenTracing.Confluent.Kafka.csproj", "{305C5063-E5D0-4368-ABCC-DBD29EF894D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77566FFD-6259-4748-8EF6-432B9F76E892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77566FFD-6259-4748-8EF6-432B9F76E892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77566FFD-6259-4748-8EF6-432B9F76E892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77566FFD-6259-4748-8EF6-432B9F76E892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{305C5063-E5D0-4368-ABCC-DBD29EF894D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{305C5063-E5D0-4368-ABCC-DBD29EF894D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{305C5063-E5D0-4368-ABCC-DBD29EF894D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{305C5063-E5D0-4368-ABCC-DBD29EF894D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{77566FFD-6259-4748-8EF6-432B9F76E892} = {722D70BB-2833-41FE-AF75-DE908D0EAE26}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B1ADC202-4051-4E6A-82BB-0C29821B7992}
+	EndGlobalSection
+EndGlobal
