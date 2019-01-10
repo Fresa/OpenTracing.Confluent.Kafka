@@ -1,0 +1,59 @@
+version: '2'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper
+    hostname: zoo1
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+  kafka-server:
+    image: confluentinc/cp-kafka
+    hostname: kafka-server
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "9997:9997"
+    environment:
+      KAFKA_JMX_PORT: 9997
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote=true 
+          -Dcom.sun.management.jmxremote.authenticate=false 
+          -Dcom.sun.management.jmxremote.ssl=false 
+          -Djava.rmi.server.hostname=127.0.0.1 
+          -Dcom.sun.management.jmxremote.port=9997
+          -Dcom.sun.management.jmxremote.rmi.port=9997
+          -Dcom.sun.management.jmxremote.local.only=false
+          -Djava.net.preferIPv4Stack=true"
+  kafka-rest-proxy:
+    image: confluentinc/cp-kafka-rest
+    hostname: kafka-rest-proxy
+    depends_on:
+      - kafka-server
+    ports:
+      - "8082:8082"
+    environment:
+      KAFKA_REST_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_REST_LISTENERS: http://0.0.0.0:8082
+      KAFKA_REST_HOST_NAME: kafka-rest-proxy
+  kafka-manager:
+    image: sheepkiller/kafka-manager:latest
+    ports:
+      - "9000:9000"
+    links:
+      - zookeeper
+      - kafka-server
+    environment:
+      ZK_HOSTS: zookeeper:2181
+      APPLICATION_SECRET: letmein
+      KM_ARGS: -Djava.net.preferIPv4Stack=true
+  kafdrop:
+    image: thomsch98/kafdrop:latest
+    ports:
+    - "9010:9010" 
+    environment:
+    - "ZK_HOSTS=zookeeper:2181"
+    - "LISTEN=9010"
