@@ -53,7 +53,10 @@ namespace OpenTracing.Confluent.Kafka
         public async Task<DeliveryReport<TKey, TValue>> ProduceAsync(string topic, Message<TKey, TValue> message,
             CancellationToken cancellationToken = new CancellationToken())
         {
-            using (var scope = _tracer.CreateActiveProducerScopeFrom(message.Headers.ToDictionary(Encoding.UTF8)))
+            message.Headers = message.Headers ?? new Headers();
+
+            using (var scope = _tracer.CreateAndInjectActiveProducerScopeFrom(
+                message.Headers.ToDictionary(Encoding.UTF8)))
             {
                 scope.Span.SetTag(Tags.MessageBusDestination, topic);
 
@@ -70,7 +73,9 @@ namespace OpenTracing.Confluent.Kafka
         public async Task<DeliveryReport<TKey, TValue>> ProduceAsync(TopicPartition topicPartition, Message<TKey, TValue> message,
             CancellationToken cancellationToken = new CancellationToken())
         {
-            using (var scope = _tracer.CreateActiveProducerScopeFrom(message.Headers.ToDictionary(Encoding.UTF8)))
+            message.Headers = message.Headers ?? new Headers();
+            
+            using (var scope = _tracer.CreateAndInjectActiveProducerScopeFrom(message.Headers.ToDictionary(Encoding.UTF8)))
             {
                 scope.Span.SetTag(Tags.MessageBusDestination, topicPartition.Topic);
 
@@ -86,7 +91,9 @@ namespace OpenTracing.Confluent.Kafka
 
         public void BeginProduce(string topic, Message<TKey, TValue> message, Action<DeliveryReportResult<TKey, TValue>> deliveryHandler)
         {
-            var scope = _tracer.CreateActiveProducerScopeFrom(message.Headers.ToDictionary(Encoding.UTF8));
+            message.Headers = message.Headers ?? new Headers();
+
+            var scope = _tracer.CreateAndInjectActiveProducerScopeFrom(message.Headers.ToDictionary(Encoding.UTF8));
             scope.Span.SetTag(Tags.MessageBusDestination, topic);
 
             _producer.BeginProduce(topic, message, TracingDeliveryHandler);
@@ -105,7 +112,9 @@ namespace OpenTracing.Confluent.Kafka
 
         public void BeginProduce(TopicPartition topicPartition, Message<TKey, TValue> message, Action<DeliveryReportResult<TKey, TValue>> deliveryHandler)
         {
-            var scope = _tracer.CreateActiveProducerScopeFrom(message.Headers.ToDictionary(Encoding.UTF8));
+            message.Headers = message.Headers ?? new Headers();
+
+            var scope = _tracer.CreateAndInjectActiveProducerScopeFrom(message.Headers.ToDictionary(Encoding.UTF8));
             scope.Span.SetTag(Tags.MessageBusDestination, topicPartition.Topic);
 
             _producer.BeginProduce(topicPartition, message, TracingDeliveryHandler);

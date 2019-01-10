@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Confluent.Kafka;
 
@@ -9,7 +8,12 @@ namespace OpenTracing.Confluent.Kafka
     {
         internal static IDictionary<string, string> ToDictionary(this Headers headers, Encoding encoding)
         {
-            return headers.ToDictionary(header => header.Key, header => encoding.GetString(header.Value));
+            if (headers == null)
+            {
+                return new Dictionary<string, string>();
+            }
+
+            return new HeaderDictionary(headers);
         }
     }
 }

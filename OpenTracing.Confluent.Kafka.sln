@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTracing.Confluent.Kafka
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTracing.Confluent.Kafka", "src\OpenTracing.Confluent.Kafka\OpenTracing.Confluent.Kafka.csproj", "{305C5063-E5D0-4368-ABCC-DBD29EF894D0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{AF8CB38E-703D-4433-9D2C-452DBBB87AB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confluent.Kafka.Clients.Traced.By.Jaeger", "examples\Confluent.Kafka.Producer.And.Consumer.Traced.By.Jaeger\Confluent.Kafka.Clients.Traced.By.Jaeger.csproj", "{902409E0-3709-46FE-B3B4-D01BCD4E4EB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +27,17 @@ Global
 		{305C5063-E5D0-4368-ABCC-DBD29EF894D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{305C5063-E5D0-4368-ABCC-DBD29EF894D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{305C5063-E5D0-4368-ABCC-DBD29EF894D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{902409E0-3709-46FE-B3B4-D01BCD4E4EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{902409E0-3709-46FE-B3B4-D01BCD4E4EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{902409E0-3709-46FE-B3B4-D01BCD4E4EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{902409E0-3709-46FE-B3B4-D01BCD4E4EB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{77566FFD-6259-4748-8EF6-432B9F76E892} = {722D70BB-2833-41FE-AF75-DE908D0EAE26}
+		{902409E0-3709-46FE-B3B4-D01BCD4E4EB1} = {AF8CB38E-703D-4433-9D2C-452DBBB87AB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1ADC202-4051-4E6A-82BB-0C29821B7992}

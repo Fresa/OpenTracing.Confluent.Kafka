@@ -6,7 +6,7 @@ namespace OpenTracing.Confluent.Kafka
 {
     public static class TracerExtensions
     {
-        public static IScope CreateActiveProducerScopeFrom(this ITracer tracer, IDictionary<string, string> headers)
+        public static IScope CreateAndInjectActiveProducerScopeFrom(this ITracer tracer, IDictionary<string, string> headers)
         {
             var spanBuilder = tracer.BuildSpan("send")
                 .WithTag(Tags.SpanKind.Key, Tags.SpanKindProducer);
@@ -18,14 +18,13 @@ namespace OpenTracing.Confluent.Kafka
 
             var scope = spanBuilder.StartActive(true);
 
-            return new DelegateOnDisposeScopeDecorator(() =>
-            {
-                tracer.Inject(scope.Span.Context, BuiltinFormats.TextMap,
-                    new TextMapInjectAdapter(headers));
-            }, scope);
+            tracer.Inject(scope.Span.Context, BuiltinFormats.TextMap,
+                new TextMapInjectAdapter(headers));
+
+            return scope;
         }
 
-        public static IScope CreateActiveConsumerScopeFrom(this ITracer tracer, IDictionary<string, string> headers)
+        public static IScope CreateAndInjectActiveConsumerScopeFrom(this ITracer tracer, IDictionary<string, string> headers)
         {
             var spanBuilder = tracer.BuildSpan("receive")
                 .WithTag(Tags.SpanKind.Key, Tags.SpanKindConsumer);
@@ -37,11 +36,10 @@ namespace OpenTracing.Confluent.Kafka
 
             var scope = spanBuilder.StartActive(true);
 
-            return new DelegateOnDisposeScopeDecorator(() =>
-            {
-                tracer.Inject(scope.Span.Context, BuiltinFormats.TextMap,
-                    new TextMapInjectAdapter(headers));
-            }, scope);
+            tracer.Inject(scope.Span.Context, BuiltinFormats.TextMap,
+                new TextMapInjectAdapter(headers));
+
+            return scope;            
         }
     }
 }

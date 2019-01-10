@@ -57,7 +57,14 @@ namespace OpenTracing.Confluent.Kafka
         {
             result = _consumer.Consume(timeout);
 
-            var scope = _tracer.CreateActiveConsumerScopeFrom(result.Headers.ToDictionary(Encoding.UTF8));
+            if (result == null)
+            {
+                return null;
+            }
+
+            result.Headers = result.Headers ?? new Headers();
+
+            var scope = _tracer.CreateAndInjectActiveConsumerScopeFrom(result.Headers.ToDictionary(Encoding.UTF8));
 
             scope.Span.SetTag("kafka.topic", result.Topic);
             scope.Span.SetTag("kafka.partition", result.Partition);
@@ -74,7 +81,14 @@ namespace OpenTracing.Confluent.Kafka
         {
             result = _consumer.Consume(cancellationToken);
 
-            var scope = _tracer.CreateActiveConsumerScopeFrom(result.Headers.ToDictionary(Encoding.UTF8));
+            if (result == null)
+            {
+                return null;
+            }
+
+            result.Headers = result.Headers ?? new Headers();
+
+            var scope = _tracer.CreateAndInjectActiveConsumerScopeFrom(result.Headers.ToDictionary(Encoding.UTF8));
 
             scope.Span.SetTag("kafka.topic", result.Topic);
             scope.Span.SetTag("kafka.partition", result.Partition);

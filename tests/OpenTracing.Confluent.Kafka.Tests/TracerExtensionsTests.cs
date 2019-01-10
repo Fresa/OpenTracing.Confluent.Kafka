@@ -31,7 +31,7 @@ namespace OpenTracing.Confluent.Kafka.Tests
 
             protected override void When()
             {
-                using (_scope = _tracer.CreateActiveProducerScopeFrom(_headers)) { }
+                using (_scope = _tracer.CreateAndInjectActiveProducerScopeFrom(_headers)) { }
             }
 
             [Fact]
@@ -76,7 +76,7 @@ namespace OpenTracing.Confluent.Kafka.Tests
 
             protected override void When()
             {
-                _tracer.CreateActiveProducerScopeFrom(_headers);
+                _tracer.CreateAndInjectActiveProducerScopeFrom(_headers);
             }
 
             [Fact]
@@ -86,9 +86,9 @@ namespace OpenTracing.Confluent.Kafka.Tests
             }
 
             [Fact]
-            public void It_should_not_have_injected_the_context()
+            public void It_should_have_injected_the_context()
             {
-                _headers.Should().BeEmpty();
+                _headers.Should().NotBeEmpty();
             }
         }
 
@@ -110,7 +110,7 @@ namespace OpenTracing.Confluent.Kafka.Tests
 
             protected override void When()
             {
-                _tracer.CreateActiveConsumerScopeFrom(_headers);
+                _tracer.CreateAndInjectActiveConsumerScopeFrom(_headers);
             }
 
             [Fact]
@@ -120,9 +120,9 @@ namespace OpenTracing.Confluent.Kafka.Tests
             }
 
             [Fact]
-            public void It_should_not_have_injected_the_context()
+            public void It_should_have_injected_the_context()
             {
-                _headers.Should().BeEmpty();
+                _headers.Should().NotBeEmpty();
             }
         }
 
@@ -144,8 +144,8 @@ namespace OpenTracing.Confluent.Kafka.Tests
 
             protected override void When()
             {
-                using (var scope = _tracer.CreateActiveProducerScopeFrom(_headers)) { }
-                using (var scope = _tracer.CreateActiveConsumerScopeFrom(_headers)) { }
+                using (_tracer.CreateAndInjectActiveProducerScopeFrom(_headers)) { }
+                using (_tracer.CreateAndInjectActiveConsumerScopeFrom(_headers)) { }
             }
 
             [Fact]
@@ -158,15 +158,15 @@ namespace OpenTracing.Confluent.Kafka.Tests
             public void It_should_have_set_a_follow_reference_from_the_send_span_to_the_receive_span()
             {
                 _tracer.FinishedSpans().Last().References.Should()
-                    .Contain(reference => 
+                    .Contain(reference =>
                         reference.Context.SpanId == _tracer.FinishedSpans().First().Context.SpanId)
                     .And
-                    .Contain(reference => 
+                    .Contain(reference =>
                         reference.Context.TraceId == _tracer.FinishedSpans().First().Context.TraceId)
                     .And
                     .HaveCount(1)
                     .And
-                    .Contain(reference => 
+                    .Contain(reference =>
                         reference.ReferenceType == References.FollowsFrom);
             }
         }
