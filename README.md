@@ -9,8 +9,8 @@ OpenTracing Kafka Client contains a simple extension of the <a href="https://git
 https://www.nuget.org/packages/OpenTracing.Confluent.Kafka
 
 ## Usage
-See <a href="https://github.com/Fresa/OpenTracing.Confluent.Kafka/tree/master/examples/Confluent.Kafka.Producer.And.Consumer.Traced.By.Jaeger" target="_blank">Example</a>. It uses Kafka and Jaeger. To setup the infrastructure for the example see <a href="https://github.com/Fresa/OpenTracing.Confluent.Kafka/tree/master/examples/Infrastructure">Running Kafka within Docker and Kubernetes</a>.
+See <a href="https://github.com/Fresa/OpenTracing.Confluent.Kafka/tree/master/examples/Confluent.Kafka.Producer.And.Consumer.Traced.By.Jaeger" target="_blank">Example</a>. It uses Kafka and Jaeger. To setup the infrastructure for the example see <a href="https://github.com/Fresa/OpenTracing.Confluent.Kafka/tree/master/examples/Infrastructure">Running Kafka and Jaeger within Docker and Kubernetes</a>.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/87tx3wu0d7vow2m3?svg=true)](https://ci.appveyor.com/project/Fresa/OpenTracing.Confluent.Kafka)
+[![Build status](https://ci.appveyor.com/api/projects/status/87tx3wu0d7vow2m3?svg=true)](https://ci.appveyor.com/project/Fresa/opentracing-kafka-client)
 
-[![Build history](https://buildstats.info/appveyor/chart/Fresa/OpenTracing.Confluent.Kafka)](https://ci.appveyor.com/project/Fresa/OpenTracing.Confluent.Kafka/history)
+[![Build history](https://buildstats.info/appveyor/chart/Fresa/opentracing-kafka-client)](https://ci.appveyor.com/project/Fresa/opentracing-kafka-client/history)
