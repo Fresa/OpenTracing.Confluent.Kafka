@@ -17,7 +17,6 @@ namespace OpenTracing.Confluent.Kafka
             _consumer = consumer;
         }
 
-
         public void Dispose()
         {
             _consumer.Dispose();
