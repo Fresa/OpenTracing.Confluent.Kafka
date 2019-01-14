@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Reference Include="OpenTracing">
-      <HintPath>C:\Users\Fresa\.nuget\packages\opentracing\0.12.0\lib\netstandard1.3\OpenTracing.dll</HintPath>
     </Reference>
   </ItemGroup>
 
