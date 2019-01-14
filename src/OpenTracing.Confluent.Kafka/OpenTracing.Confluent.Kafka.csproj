@@ -1,18 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>OpenTracing.Confluent.Kafka</AssemblyName>
     <RootNamespace>OpenTracing.Confluent.Kafka</RootNamespace>
+    <Authors>Fredrik Arvidsson</Authors>
+    <Company>FKAN Consulting AB</Company>
+    <Copyright>Copyright ©  2019</Copyright>
+    <PackageTags>opentracing kafka</PackageTags>
+    <Description>Client extensions for tracking continues asynchronus spans over Kafka using Confluent.Kafka client and OpenTracing</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://github.com/Fresa/opentracing-kafka-client/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Fresa/opentracing-kafka-client</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Fresa/opentracing-kafka-client</RepositoryUrl>
+    <PackageVersion></PackageVersion>
+    <PackageReleaseNotes />
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="1.0.0-beta2" />
     <PackageReference Include="OpenTracing" Version="0.12.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63102-01" PrivateAssets="All" />
   </ItemGroup>
-
+  <PropertyGroup Condition="'$(NCrunch)' == '1'">
+    <EnableSourceControlManagerQueries>false</EnableSourceControlManagerQueries>
+  </PropertyGroup>
 </Project>

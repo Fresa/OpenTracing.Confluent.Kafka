@@ -1,0 +1,48 @@
+version: 1.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+skip_tags: true
+image: Visual Studio 2017
+configuration: Release
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+environment:
+  git_access_token:
+    secure: V8i7UZRY6IQFpngUi2sgnunCFZKvE4al96flaBKyWqXyRLmTabX0/1Z0Tpl8BWKr
+  nuget_api_key:
+    secure: OuKd332iG0hMgbOQvO4rCvMOtySWRH6rz9vuih81zdsOZFSkjxXx7tlbq8K/6gJK
+nuget:
+  account_feed: true
+  disable_publish_on_pr: true
+before_build:
+- cmd: nuget restore
+build:
+  publish_nuget: true
+  verbosity: minimal
+before_package:
+- ps: "git fetch --tags\n$tags = git tag -l v*\nif ($tags)\n{\n    $releaseNotes = git log \"$(git describe --tags --match v* --abbrev=0)..$($env:APPVEYOR_REPO_COMMIT)\" --pretty=format:\"-%s\" --no-merges\n} \nelse\n{\n    $releaseNotes = git log $($env:APPVEYOR_REPO_COMMIT) --pretty=format:\"-%s\" --no-merges\n}\n\n$releaseNotesAsString = if ($releaseNotes -eq $null) { \"\" } else { [string]::join(\"`n\", $releaseNotes) }\n\nWrite-Host \"Release notes: '$($releaseNotesAsString)'\"\n\n$path = \"src/$env:APPVEYOR_PROJECT_NAME/$env:APPVEYOR_PROJECT_NAME.csproj\"\n[xml]$xml = Get-Content -Path $path\n$xml.GetElementsByTagName(\"PackageReleaseNotes\").set_InnerXML(\"$releaseNotesAsString\")\nSet-Content $path -Value $xml.InnerXml -Force"
+deploy:
+- provider: NuGet
+  api_key:
+    secure: W6SXqw8kP6Ivhxzi3UHzUHJPC4Cc0AOcdwfplsbs0Gg=
+  on:
+    branch: master
+after_deploy:
+- ps: >-
+    git config --global credential.helper store
+
+    Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:git_access_token):x-oauth-basic@github.com`n"
+
+    git config --global user.email "fresa@fresa.se"
+
+    git config --global user.name "Fredrik Arvidsson"
+
+    git tag v$($env:APPVEYOR_BUILD_VERSION) $($env:APPVEYOR_REPO_COMMIT)
+
+    git push origin --tags --quiet

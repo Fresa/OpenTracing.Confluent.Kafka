@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Jaeger;
 using Jaeger.Samplers;
@@ -51,6 +52,9 @@ namespace Confluent.Kafka.Clients.Traced.By.Jaeger
                         scope.Span.SetTag("Consumer.Timeout", 5);
                         scope.Span.SetTag("Consumer.Message.Key", consumeResult.Key);
                         scope.Span.SetTag("Consumer.Message.Value", consumeResult.Value);
+
+                        // Simulate consumption load for nicer traces
+                        await Task.Delay(TimeSpan.FromSeconds(1));
 
                         Console.WriteLine(
                             $"Received message from partition {consumeResult.Partition.Value}, offset {consumeResult.Offset.Value} on topic {consumeResult.Topic}");
