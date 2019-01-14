@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTracing.Confluent.Kafka
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{AF8CB38E-703D-4433-9D2C-452DBBB87AB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confluent.Kafka.Clients.Traced.By.Jaeger", "examples\Confluent.Kafka.Producer.And.Consumer.Traced.By.Jaeger\Confluent.Kafka.Clients.Traced.By.Jaeger.csproj", "{902409E0-3709-46FE-B3B4-D01BCD4E4EB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Confluent.Kafka.Clients.Traced.By.Jaeger", "examples\Confluent.Kafka.Producer.And.Consumer.Traced.By.Jaeger\Confluent.Kafka.Clients.Traced.By.Jaeger.csproj", "{902409E0-3709-46FE-B3B4-D01BCD4E4EB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{3A3E7B97-E3A7-4A32-A2D2-9484C1F502F5}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
